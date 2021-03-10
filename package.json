@@ -1,0 +1,29 @@
+{
+  "name": "mesa-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.4.1",
+    "@typechain/ethers-v5": "^6.0.2",
+    "@types/node": "^14.14.33",
+    "dotenv": "^8.2.0",
+    "ethers": "^5.0.32",
+    "glob": "^7.1.6",
+    "globby": "^11.0.2",
+    "hardhat": "^2.0.10",
+    "ts-node": "^9.1.1",
+    "typechain": "^4.0.1",
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "hardhat compile",
+    "setup": "ts-node setup.ts",
+    "typechain-build": "typechain --target ethers-v5 --outDir src/contracts abis/*.json"
+  },
+  "keywords": [],
+  "author": "Adam Azad <adam@adamazad.com> (https://adamazad.com/)",
+  "license": "ISC"
+}
