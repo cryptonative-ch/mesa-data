@@ -42,7 +42,7 @@ export async function createAuction(
     minFundingThreshold,
   }: CreateAuctionProps
 ) {
-  const createAuctionTx = await easyAuctionContract.emitNewAuction(
+  return await easyAuctionContract.emitNewAuction(
     auctionId,
     auctioningToken,
     biddingToken,
@@ -53,7 +53,6 @@ export async function createAuction(
     minimumBiddingAmountPerOrder,
     minFundingThreshold
   )
-  return createAuctionTx
 }
 
 interface CreateAuctionBidProps {
@@ -67,7 +66,5 @@ export async function createAuctionBid(
   easyAuctionContract: EasyAuction,
   { auctionId, userId, buyAmount, sellAmount }: CreateAuctionBidProps
 ) {
-  const createAuctionBidTx = await easyAuctionContract.emitNewSellOrder(auctionId, userId, buyAmount, sellAmount)
-
-  return createAuctionBidTx
+  return easyAuctionContract.emitNewSellOrder(auctionId, userId, buyAmount, sellAmount)
 }
