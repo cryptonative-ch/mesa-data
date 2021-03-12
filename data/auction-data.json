@@ -1,0 +1,6 @@
+{
+  "network": "rinkeby",
+  "easyAuctionAddress": "0xEb3Caa20ac5540834DDF2D32B8D741c3B32630a4",
+  "mesaTokenAddress": "0x7afe6b1167a02a4386b79890f15ac63952669871",
+  "daiATokenAddress": "0x9a2e3661850dc4075e853be0d3ebf1b1ad2410fc"
+}
