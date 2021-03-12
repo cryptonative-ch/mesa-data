@@ -8,6 +8,7 @@
     "@typechain/ethers-v5": "^6.0.2",
     "@types/node": "^14.14.33",
     "csvtojson": "^2.0.10",
+    "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
     "ethers": "^5.0.32",
     "glob": "^7.1.6",
