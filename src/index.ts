@@ -1,5 +1,7 @@
 // Externals
 import { InfuraProvider } from '@ethersproject/providers'
+import { resolve } from 'path'
+import dayjs from 'dayjs'
 
 // Constants
 import { INFURA_KEY, MEEMONIC } from './constants'
@@ -9,11 +11,18 @@ import { INFURA_KEY, MEEMONIC } from './constants'
 import { createAuction, getEasyAuctionContract } from './mesa'
 import { getWallets } from './wallet'
 
-const NETOWRK = 'rinkeby'
-const EASY_AUCTION_ADDRESS = '0xEb3Caa20ac5540834DDF2D32B8D741c3B32630a4'
+import { parseAuctionData } from './auction-data'
 
+// Auction data
+import { daiATokenAddress, mesaTokenAddress, easyAuctionAddress, network } from '../data/auction-data.json'
 ;(async () => {
-  const infuraProvider = new InfuraProvider(NETOWRK, INFURA_KEY)
+  console.info('Parsing realistic-bids.csv')
+  const auctionBidsFromCSV = await parseAuctionData(resolve(__dirname, '../data/realistic-bids.csv'))
+  console.info('Parsed realistic-bids.csv')
+
+  console.log(auctionBidsFromCSV)
+
+  const infuraProvider = new InfuraProvider(network, INFURA_KEY)
   const wallets = getWallets(MEEMONIC, infuraProvider)
 
   // Extract wallets:
@@ -21,15 +30,15 @@ const EASY_AUCTION_ADDRESS = '0xEb3Caa20ac5540834DDF2D32B8D741c3B32630a4'
   // Nine investors
   const [auctionCreator] = wallets
 
-  const easyAuction = getEasyAuctionContract(EASY_AUCTION_ADDRESS, auctionCreator)
+  const easyAuction = getEasyAuctionContract(easyAuctionAddress, auctionCreator)
 
   console.log(`Creating new auction by ${auctionCreator.address}`)
   const createAuctionTx = await createAuction(easyAuction, {
-    auctionId: 10,
-    auctioningToken: '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
-    biddingToken: '0x7090363b7dA6d97Ed575F17900AeeE949c2B7Cf9',
+    auctionId: 11,
+    auctioningToken: mesaTokenAddress,
+    biddingToken: daiATokenAddress,
     orderCancellationEndDate: 9000,
-    auctionEndDate: 9000,
+    auctionEndDate: dayjs().add(10, 'hours').unix(),
     auctionedSellAmount: 10000,
     minBuyAmount: 10,
     minimumBiddingAmountPerOrder: 150,
