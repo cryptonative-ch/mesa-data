@@ -5,13 +5,15 @@ interface AuctionBid {
   addressName: string
   addressIndex: number
   tokenInAmount: number
+  tokenOutAmount: number
   price: number
 }
 
-export const fixFieldTypes = ({ addressIndex, addressName, price, tokenInAmount }: AuctionBid): AuctionBid => ({
+export const fixFieldTypes = ({ addressIndex, addressName, price, tokenInAmount, tokenOutAmount}: AuctionBid): AuctionBid => ({
   addressName,
   price: parseFloat(price.toString()),
   tokenInAmount: parseFloat(tokenInAmount.toString()),
+  tokenOutAmount: parseFloat(tokenInAmount.toString()) / parseFloat(price.toString()), // may introduce runding error
   addressIndex: parseFloat(addressIndex.toString()),
 })
 
